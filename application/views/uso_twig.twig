@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Prueba de Twig</title>
+</head>
+<body>
+    <b>El número entero es:</b> {{ numero }}
+    <br>
+    <b>La cadena de caracteres:</b> {{ cadena }}
+    <br>
+    <b>El número flotante es: </b> {{ flotante }}
+    <br>
+    <b>El contenido del array es: </b>
+    <br>
+    <ul>
+        {% for key, value in arr %}
+        <li>{{ key }} : {{ value }}</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <b>El contenido del objeto es: </b>
+    <br>
+    prop1 : {{ objeto.prop1 }}
+    <br>
+    prop2 : {{ objeto.prop2 }}
+    <br>
+</body>
+</html>
