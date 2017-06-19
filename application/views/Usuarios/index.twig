@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ base_url() }}css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Usuarios</h3>
+            </div>
+            <div class="col-sm-6">
+                <a href="{{ base_url() }}index.php/Usuarios/nuevo" class="btn btn-info pull-right">Crear Nuevo</a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            {% if msj != null %}
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Mensaje: </strong> {{ msj }}
+            </div>
+            {% endif %}
+            <div class="col-sm-12">
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Usuario</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for usr in usuarios %}
+                        <tr>
+                            <td>{{ usr.idUsuarios }}</td>
+                            <td>{{ usr.Nombres }}</td>
+                            <td>{{ usr.Apellidos }}</td>
+                            <td>{{ usr.UserName }}</td>
+                            <td>
+                                <a href="{{ base_url() }}index.php/Usuarios/editar/{{ usr.idUsuarios }}">Editar</a>
+                                | <a href="{{ base_url() }}index.php/Usuarios/eliminar/{{ usr.idUsuarios }}">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5">Ningun Elemento Disponible</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{{ base_url() }}js/jquery-2.2.4.min.js"></script>
+    <script src="{{ base_url() }}js/bootstrap.min.js"></script>
+</body>
+
+</html>

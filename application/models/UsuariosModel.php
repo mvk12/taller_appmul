@@ -16,7 +16,7 @@ class UsuariosModel extends CI_Model
 
     public function select_where($id)
     {
-        $id = $this->db->escape($id);
+        $id = (int) $id;
         
         return $this->db
             ->select('*')

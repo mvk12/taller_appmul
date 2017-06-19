@@ -12,7 +12,7 @@ class Usuarios extends CI_Controller {
 
     public function index()
     {
-        $this->viewdata['usuarios'] = $this->usuariosmodel->select();
+        $this->viewdata['usuarios'] = $this->UsuariosModel->select();
 
         $this->twig->display('Usuarios/index', $this->viewdata);
     }
@@ -38,28 +38,31 @@ class Usuarios extends CI_Controller {
             'Contrasenia' => $pass,
         );
 
-        $id = $this->usuariosmodel->insert($data);
+        $id = $this->UsuariosModel->insert($data);
 
         if( $id > 0 ) {
             echo 'Creado Exitosamente';
+            redirect('Usuarios','refresh');
         }
         else {
             echo 'Error al crear usuario';
+            redirect('Usuarios','refresh');
         }
     }
 
     public function editar($id = 0)
     {
+        $id = (int) $id;
         if( $id <= 0 ) {
             echo 'Id inválido';
             return;
         }
 
-        $users = $this->usuariosmodel->select_where($id);
+        $users = $this->UsuariosModel->select_where($id);
 
-        $this->viewdata['user'] = $users[0];
+        $this->viewdata['usuario'] = $users[0];
 
-        $this->twig->display('Users/editar', $this->viewdata);
+        $this->twig->display('Usuarios/editar', $this->viewdata);
     }
 
     public function update()
@@ -82,14 +85,19 @@ class Usuarios extends CI_Controller {
             $data['Contrasenia'] = $pass;
         }
 
-        $rows = $this->usuariosmodel->update($data);
+        $rows = $this->UsuariosModel->update((int)$id, $data);
 
         if( $rows > 0 ) {
-            echo 'Actualizado Exitosamente';
+            redirect('Usuarios','refresh');
         }
         else {
-            echo 'Error al actualizar usuario';
+            redirect('Usuarios','refresh');
         }
+    }
+
+    public function eliminar($id = 0)
+    {
+        redirect("Usuarios/delete/$id",'refresh');   
     }
 
     public function delete($id = 0)
@@ -99,13 +107,13 @@ class Usuarios extends CI_Controller {
             return;
         }
 
-        $rows = $this->usuariosmodel->delete($id);
+        $rows = $this->UsuariosModel->delete($id);
 
         if( $rows > 0 ) {
-            echo 'Eliminado Exitosamente';
+            redirect('Usuarios','refresh');
         }
         else {
-            echo 'Error al eliminar usuario';
+            redirect('Usuarios','refresh');
         }
     }
 }
